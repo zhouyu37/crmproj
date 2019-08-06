@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div style="margin: 20px">
+        <a href="{% url 'crm:departadd' %}"><i class="fa fa-address-card-o fa-lg" aria-hidden="true"></i>add</a>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>SN</th>
+                <th>ID</th>
+                <th>name</th>
+                <th>desc</th>
+                <th>operate</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for depart in departs %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ depart.id }}</td>
+                    <td>{{ depart.name }}</td>
+                    <td>{{ depart.desc }}</td>
+                    {#http://www.fontawesome.com.cn/faicons/#}
+                    <td>
+                        {% load my_tags %}
+                        <a href="{% reverse_url request 'crm:departedit'  depart.id %}"><i class="fa fa-edit fa-lg"
+                                                                           aria-hidden="true"></i></a>
+                        {#                            <a href="{% url 'crm:departdel'  depart.id  %}"><i class="fa fa-remove fa-lg" aria-hidden="true"></i></a>#}
+                        <a class="del" del_id="{{ depart.id }}" ><i class="fa fa-remove fa-lg" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+{#                {% for i in total_num %}#}
+{#                <li><a href="?page={{ i }}">{{ i }}</a></li>#}
+{#                {% endfor %}#}
+{#                {{ page_html | safe}}#}
+                {{ page_html }}
+
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script>
+ $('.del').click(function () {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+
+                    {#console.log($(this).attr('del_id'))#}
+                    $.ajax({
+                        url: '/crm/depart/del/' + $(this).attr('del_id'),
+                        type: 'get',
+                        success: (res) => {
+                            if (res.status) {
+                                swal('delete file error');
+                            } else {
+                                swal("Poof! Your imaginary file has been deleted!", {
+                                    icon: "success",
+                                });
+                                $(this).parent().parent().remove()
+                            }
+
+                        }
+
+                    })
+
+
+                } else {
+
+                    swal("Your imaginary file is safe!");
+                }
+            });
+        })
+
+    </script>
+{% endblock %}

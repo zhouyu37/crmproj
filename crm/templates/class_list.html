@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div style="margin: 20px">
+        <a href="{% url 'crm:classadd' %}"><i class="fa fa-address-card-o fa-lg" aria-hidden="true"></i>add</a>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>SN</th>
+                <th>ID</th>
+                <th>classname</th>
+                <th>xuefei</th>
+                <th>kaibantime</th>
+                <th>jieyetime</th>
+                <th>banzhuren</th>
+                <th>renkelaoshi</th>
+                <th>shuoming</th>
+                <th>operate</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for class in classes %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ class.id }}</td>
+                    <td>{{ class.school }}{{ class.course }}{{ class.semester }}</td>
+                    <td>{{ class.price }}</td>
+                    <td>{{ class.start_date | date:'Y-m-d' }}</td>
+                    <td>{{ class.graduate_date | date:'Y-m-d' }}</td>
+                    <td>{{ class.tutor }}</td>
+                    <td>{{ class.show_teachers }}</td>
+                    <td>{{ class.memo }}</td>
+                    {#http://www.fontawesome.com.cn/faicons/#}
+                    <td>
+                        <a href="{% url 'crm:classedit'  class.id %}"><i class="fa fa-edit fa-lg"
+                                                                           aria-hidden="true"></i></a>
+                        {#                            <a href="{% url 'crm:departdel'  depart.id  %}"><i class="fa fa-remove fa-lg" aria-hidden="true"></i></a>#}
+                        <a class="" href="#"><i class="fa fa-remove fa-lg" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+{% endblock %}

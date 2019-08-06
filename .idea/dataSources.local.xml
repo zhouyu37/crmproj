@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="db" uuid="72f1e9b6-070b-423b-9fa1-a332cf55bb48">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <introspection-schemas>*:</introspection-schemas>
+    </data-source>
+    <data-source name="publishnew@10.110.152.159" uuid="71572116-5942-4363-8ce5-202a6ee91a8f">
+      <database-info product="MySQL" version="5.6.43" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>zhou</user-name>
+      <introspection-schemas>*:publishnew</introspection-schemas>
+    </data-source>
+  </component>
+</project>
